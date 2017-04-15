@@ -6,10 +6,20 @@ import com.badlogic.gdx.math.Rectangle;
 
 import static com.ldm2468.upnl.Upnl.game;
 
+/**
+ * Circular enemy.
+ */
 public class CircularEnemy implements Enemy {
     float x, y, r;
     Color c;
 
+    /**
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param r radius
+     * @param c color
+     */
     public CircularEnemy(float x, float y, float r, Color c) {
         this.x = x;
         this.y = y;

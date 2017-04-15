@@ -5,28 +5,34 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class SpawningEnemy implements Enemy {
-    Enemy e;
+    LinearCircularEnemy e;
     int elFrames = 0;
     int t = 0;
+    int spawnNo = 1;
     int spawnPeriod;
     Array<Enemy> pool;
     CircularEnemy template;
     ThetaLogic theta;
     SpeedLogic v;
+    boolean relSpeed;
+
     public interface ThetaLogic {
         float theta(int t);
     }
+
     public interface SpeedLogic {
         float v(int t);
     }
 
-    public SpawningEnemy(Enemy e, int spawnPeriod, Array<Enemy> pool, CircularEnemy template, ThetaLogic theta, SpeedLogic v) {
+    public SpawningEnemy(LinearCircularEnemy e, int spawnPeriod, Array<Enemy> pool, CircularEnemy template, ThetaLogic theta, SpeedLogic v, int spawnNo, boolean relSpeed) {
         this.e = e;
         this.spawnPeriod = spawnPeriod;
         this.pool = pool;
         this.template = template;
         this.theta = theta;
         this.v = v;
+        this.spawnNo = spawnNo;
+        this.relSpeed = relSpeed;
     }
 
     @Override
@@ -36,8 +42,15 @@ public class SpawningEnemy implements Enemy {
         if (elFrames == spawnPeriod) {
             float v = this.v.v(t);
             float theta = this.theta.theta(t);
-            pool.add(new LinearCircularEnemy(e.x(), e.y(), v * MathUtils.cos(theta), v * MathUtils.sin(theta),
-                    template.r(), template.color()));
+            for (int i = 0; i < spawnNo; i++) {
+                float vx = v * MathUtils.cos(theta + i * MathUtils.PI2 / spawnNo),
+                        vy = v * MathUtils.sin(theta + i * MathUtils.PI2 / spawnNo);
+                if (relSpeed) {
+                    vx += e.vx;
+                    vy += e.vy;
+                }
+                pool.add(new LinearCircularEnemy(e.x(), e.y(), vx, vy, template.r, template.c));
+            }
             t++;
             elFrames = 0;
         }

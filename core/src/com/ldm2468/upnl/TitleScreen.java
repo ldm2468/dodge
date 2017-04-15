@@ -19,7 +19,8 @@ public class TitleScreen implements Screen {
         game.sbui.draw(game.title, Gdx.graphics.getWidth() / 2 - game.title.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - game.title.getHeight() / 2);
         game.sbui.end();
-        if (KB.anyKeyJ()) {
+
+        if (KB.anyKeyJ()) { // any key
             game.setScreen(new GameScreen());
         }
     }

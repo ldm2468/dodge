@@ -7,7 +7,7 @@ import com.ldm2468.upnl.Upnl;
 public class DesktopLauncher {
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setBackBufferConfig(8, 8, 8, 8, 16, 0, 2);
+        config.setBackBufferConfig(8, 8, 8, 8, 16, 0, 4);
         config.setWindowSizeLimits(1280, 720, -1, -1);
         new Lwjgl3Application(new Upnl(), config);
     }
