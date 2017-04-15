@@ -84,6 +84,11 @@ public class NameScreen implements Screen {
         if (KB.anyJ(Input.Keys.FORWARD_DEL) && pointer < name.length()) {
             name = name.substring(0, pointer) + name.substring(pointer + 1, name.length());
         }
+        if(KB.anyJ(Input.Keys.ENTER) && name.length() > 0) {
+            game.preferences.putString("name", name);
+            game.preferences.flush();
+            game.setScreen(new TitleScreen());
+        }
         char c = input.pop();
         if (c != 0) {
             if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9') {
