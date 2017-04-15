@@ -6,9 +6,16 @@ import com.badlogic.gdx.math.Rectangle;
 
 import static com.ldm2468.upnl.Upnl.game;
 
-public abstract class CircularEnemy implements Enemy {
+public class CircularEnemy implements Enemy {
     float x, y, r;
     Color c;
+
+    public CircularEnemy(float x, float y, float r, Color c) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.c = c;
+    }
 
     @Override
     public boolean hit(float x0, float y0, float r) {
@@ -18,7 +25,40 @@ public abstract class CircularEnemy implements Enemy {
     @Override
     public void draw() {
         game.sr.setColor(c);
-        game.sr.circle(x, y, r, 20);
+        game.sr.circle(x, y, r, 16);
+    }
+
+    @Override
+    public float x() {
+        return x;
+    }
+
+    @Override
+    public float y() {
+        return y;
+    }
+
+    public float r() {
+        return r;
+    }
+
+    public Color color() {
+        return c;
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public OutOfBoundsBehavior oobBehavior() {
+        return OutOfBoundsBehavior.NONE;
+    }
+
+    @Override
+    public void respawn() {
+
     }
 
     @Override

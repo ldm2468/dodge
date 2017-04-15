@@ -3,6 +3,8 @@ package com.ldm2468.upnl;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,6 +17,8 @@ public class Upnl extends Game {
     Viewport ui, view;
     public SpriteBatch sbui;
     public ShapeRenderer sr;
+    public BitmapFont timeFont;
+    public Texture title;
 
     @Override
     public void create() {
@@ -26,11 +30,13 @@ public class Upnl extends Game {
         sr = new ShapeRenderer();
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         setScreen(new TitleScreen());
+        timeFont = new BitmapFont(Gdx.files.internal("lato-1.fnt"));
+        title = new Texture("title.png");
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.1f, 0.1f, 0.13f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         super.render();
     }

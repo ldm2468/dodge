@@ -22,7 +22,7 @@ public class HtmlLauncher extends GwtApplication {
     @Override
     public GwtApplicationConfiguration getConfig() {
         GwtApplicationConfiguration config = new GwtApplicationConfiguration(WIDTH, HEIGHT);
-
+        config.antialiasing = true;
         Element element = Document.get().getElementById("embed-html");
         VerticalPanel panel = new VerticalPanel();
         panel.setWidth("100%");

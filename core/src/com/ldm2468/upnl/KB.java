@@ -30,7 +30,15 @@ public class KB {
                 return false;
             }
         }
+        return anyKey();
+    }
+
+    public static boolean anyKey() {
         return Gdx.input.isKeyPressed(Input.Keys.ANY_KEY);
+    }
+
+    public static boolean anyKeyJ() {
+        return Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY);
     }
 
     public static float x() {

@@ -1,32 +1,38 @@
 <!doctype html>
 <html>
-       <head>
-              <title>upnl</title>
-              <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-              <link href="styles.css" rel="stylesheet" type="text/css">
-              <script src="soundmanager2-setup.js"></script>
-  			  <script src="soundmanager2-jsmin.js"></script>
-       </head>
+<head>
+       <title>upnl dodge</title>
+       <link rel="stylesheet" href="/ldm2468.css">
+       <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+       <link rel="icon" href="/favicon.ico" />
+       <script src="soundmanager2-setup.js"></script>
+       <script src="soundmanager2-jsmin.js"></script>
+</head>
 
-       <body>
-              <a class="superdev" href="javascript:%7B%20window.__gwt_bookmarklet_params%20%3D%20%7B'server_url'%3A'http%3A%2F%2Flocalhost%3A9876%2F'%7D%3B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20'http%3A%2F%2Flocalhost%3A9876%2Fdev_mode_on.js'%3B%20void(document.getElementsByTagName('head')%5B0%5D.appendChild(s))%3B%7D">&#8635;</a>
-              <div align="center" id="embed-html"></div>
-              <script type="text/javascript" src="html/html.nocache.js"></script>
-       </body>
 
-       <script>
-              function handleMouseDown(evt) {
-                evt.preventDefault();
-                evt.stopPropagation();
-                evt.target.style.cursor = 'default';
-              }
+<body>
+<a style="color: black" href="javascript:%7B%20window.__gwt_bookmarklet_params%20%3D%20%7B'server_url'%3A'http%3A%2F%2Flocalhost%3A9876%2F'%7D%3B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20'http%3A%2F%2Flocalhost%3A9876%2Fdev_mode_on.js'%3B%20void(document.getElementsByTagName('head')%5B0%5D.appendChild(s))%3B%7D">refresh</a>
+<div id="logo" style="margin-top: 250px; display: block;">
+       <div class="ldm2468"></div>
+       <div class="logo-name" id="loading-txt" style="font-weight: normal;">잠시만 기다리세요...</div>
+</div>
+<div align="center" id="embed-html"></div>
+<script type="text/javascript" src="html/html.nocache.js"></script>
+</body>
 
-              function handleMouseUp(evt) {
-                evt.preventDefault();
-                evt.stopPropagation();
-                evt.target.style.cursor = '';
-              }
-              document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
-              document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
-       </script>
+<script>
+    function handleMouseDown(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        evt.target.style.cursor = 'default';
+    }
+
+    function handleMouseUp(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        evt.target.style.cursor = '';
+    }
+    document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
+    document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+</script>
 </html>

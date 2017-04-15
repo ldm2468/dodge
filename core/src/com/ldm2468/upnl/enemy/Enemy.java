@@ -7,6 +7,8 @@ public interface Enemy {
         DESPAWN, RESPAWN, NONE
     }
     void update();
+    float x();
+    float y();
     boolean hit(float x, float y, float r);
     void draw();
     boolean outOfBounds(Rectangle bounds);
