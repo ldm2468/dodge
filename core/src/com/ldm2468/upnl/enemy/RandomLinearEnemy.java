@@ -21,7 +21,7 @@ public class RandomLinearEnemy extends LinearCircularEnemy {
         bH = bounds.height;
         this.vMin = vMin;
         this.vMax = vMax;
-        despawn = true;
+        this.despawn = despawn;
         respawn();
     }
 
