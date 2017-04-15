@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
             if (frame == (FPS * 5)) { // magenta spawner
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 0.4f / FPS, 0.5f / FPS, ENEMY_R, e3),
-                        400, enemies, new CircularEnemy(0, 0, ENEMY_R, e3),
+                        400, enemies, new SpawningPool(ENEMY_R, e3),
                         new SpawningEnemy.ThetaLogic() {
                             @Override
                             public float theta(int t) {
@@ -80,7 +80,7 @@ public class GameScreen implements Screen {
             if (frame == (FPS * 24)) { // green spawner
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 0.4f / FPS, 0.6f / FPS, ENEMY_R, e4),
-                        40, enemies, new CircularEnemy(0, 0, ENEMY_R, e4),
+                        40, enemies, new SpawningPool(ENEMY_R, e4),
                         new SpawningEnemy.ThetaLogic() {
                             @Override
                             public float theta(int t) {
@@ -100,7 +100,7 @@ public class GameScreen implements Screen {
             if (frame == (FPS * 40)) { // cyan spawner
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 0.5f / FPS, 0.6f / FPS, ENEMY_R, e2),
-                        36, enemies, new CircularEnemy(0, 0, ENEMY_R, e2),
+                        36, enemies, new SpawningPool(ENEMY_R, e2),
                         new SpawningEnemy.ThetaLogic() {
                             @Override
                             public float theta(int t) {
@@ -118,7 +118,7 @@ public class GameScreen implements Screen {
             if (frame >= (FPS * 60) && frame % (FPS * 15) == 0) {
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 1f / FPS, 1f / FPS, ENEMY_R, e5, true),
-                        20, enemies, new CircularEnemy(0, 0, ENEMY_R, e5),
+                        20, enemies, new SpawningPool(ENEMY_R, e5),
                         new SpawningEnemy.ThetaLogic() {
                             @Override
                             public float theta(int t) {
@@ -136,7 +136,7 @@ public class GameScreen implements Screen {
             if(frame == FPS * 90) {
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 0.5f / FPS, 0.5f / FPS, ENEMY_R, e7),
-                        60, enemies, new CircularEnemy(0, 0, ENEMY_R, e7),
+                        60, enemies, new SpawningPool(ENEMY_R, e7),
                         new SpawningEnemy.ThetaLogic() {
                             @Override
                             public float theta(int t) {

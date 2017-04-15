@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Spawns enemies while moving
+ */
 public class SpawningEnemy implements Enemy {
     LinearCircularEnemy e;
     int elFrames = 0;
@@ -11,7 +14,7 @@ public class SpawningEnemy implements Enemy {
     int spawnNo = 1;
     int spawnPeriod;
     Array<Enemy> pool;
-    CircularEnemy template;
+    SpawningPool spawner;
     ThetaLogic theta;
     SpeedLogic v;
     boolean relSpeed;
@@ -24,11 +27,22 @@ public class SpawningEnemy implements Enemy {
         float v(int t);
     }
 
-    public SpawningEnemy(LinearCircularEnemy e, int spawnPeriod, Array<Enemy> pool, CircularEnemy template, ThetaLogic theta, SpeedLogic v, int spawnNo, boolean relSpeed) {
+    /**
+     *
+     * @param e The enemy that spawns the other enemies
+     * @param spawnPeriod The number of frames between spawning
+     * @param pool The enemy pool to spawn enemies in
+     * @param spawningPool The spawning pool to spawn enemies from
+     * @param theta The callback for theta
+     * @param v The callback for v
+     * @param spawnNo How many to spawn every time
+     * @param relSpeed Whether to spawn with relative speed
+     */
+    public SpawningEnemy(LinearCircularEnemy e, int spawnPeriod, Array<Enemy> pool, SpawningPool spawningPool, ThetaLogic theta, SpeedLogic v, int spawnNo, boolean relSpeed) {
         this.e = e;
         this.spawnPeriod = spawnPeriod;
         this.pool = pool;
-        this.template = template;
+        this.spawner = spawningPool;
         this.theta = theta;
         this.v = v;
         this.spawnNo = spawnNo;
@@ -49,7 +63,7 @@ public class SpawningEnemy implements Enemy {
                     vx += e.vx;
                     vy += e.vy;
                 }
-                pool.add(new LinearCircularEnemy(e.x(), e.y(), vx, vy, template.r, template.c));
+                pool.add(spawner.gen(e.x, e.y, vx, vy));
             }
             t++;
             elFrames = 0;
