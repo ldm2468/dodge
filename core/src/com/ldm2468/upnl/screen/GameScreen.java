@@ -1,4 +1,4 @@
-package com.ldm2468.upnl;
+package com.ldm2468.upnl.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.ldm2468.upnl.KB;
+import com.ldm2468.upnl.Utils;
 import com.ldm2468.upnl.enemy.*;
 
 import static com.ldm2468.upnl.Upnl.game;
@@ -21,7 +23,7 @@ public class GameScreen implements Screen {
 
     Color player = Color.WHITE;
     Color hitbox = Color.BLACK;
-    Color bg = new Color(0x18182AFF);
+    Color border = new Color(0x444466FF);
     Color e1 = new Color(0xEEEE22FF);
     Color e2 = new Color(0x22EEEEFF);
     Color e3 = new Color(0xEE22EEFF);
@@ -133,7 +135,7 @@ public class GameScreen implements Screen {
                         }, 1, false));
             }
 
-            if(frame == FPS * 90) {
+            if (frame == FPS * 90) {
                 enemies.add(new SpawningEnemy(
                         new RandomLinearEnemy(game.bounds, 0.5f / FPS, 0.5f / FPS, ENEMY_R, e7),
                         60, enemies, new SpawningPool(ENEMY_R, e7),
@@ -176,13 +178,18 @@ public class GameScreen implements Screen {
         }
 
 
+        game.sr.begin(ShapeRenderer.ShapeType.Filled);
+        game.sr.setColor(border);
+        game.sr.rect(game.bounds.x - 0.2f, game.bounds.y - 0.2f, game.bounds.width + 0.4f, game.bounds.height + 0.4f);
+        game.sr.end();
+
         ScissorStack.calculateScissors(game.view.getCamera(), game.sr.getTransformMatrix(),
                 game.bounds, scissors);
         ScissorStack.pushScissors(scissors);
 
         game.sr.begin(ShapeRenderer.ShapeType.Filled);
 
-        game.sr.setColor(bg);
+        game.sr.setColor(0.1f, 0.1f, 0.13f, 1);
         game.sr.rect(game.bounds.x, game.bounds.y, game.bounds.width, game.bounds.height);
 
         game.sr.setColor(player);
@@ -199,8 +206,8 @@ public class GameScreen implements Screen {
         ScissorStack.popScissors();
 
         game.sbui.begin(); // time
-        GlyphLayout timeLayout = new GlyphLayout(game.timeFont, Utils.formatNanoTime(TimeUtils.nanoTime() - timeStart));
-        game.timeFont.draw(game.sbui, timeLayout,
+        GlyphLayout timeLayout = new GlyphLayout(game.boldFont, Utils.formatNanoTime(TimeUtils.nanoTime() - timeStart));
+        game.boldFont.draw(game.sbui, timeLayout,
                 Gdx.graphics.getWidth() - timeLayout.width - 16, Gdx.graphics.getHeight() - 16);
         game.sbui.end();
     }

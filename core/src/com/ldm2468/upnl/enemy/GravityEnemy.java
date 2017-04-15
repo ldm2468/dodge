@@ -2,7 +2,7 @@ package com.ldm2468.upnl.enemy;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.ldm2468.upnl.GameScreen;
+import com.ldm2468.upnl.screen.GameScreen;
 
 public class GravityEnemy extends CircularEnemy {
     float vx = 0, vy = 0;

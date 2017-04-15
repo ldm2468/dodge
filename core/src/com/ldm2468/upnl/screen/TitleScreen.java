@@ -1,11 +1,12 @@
-package com.ldm2468.upnl;
+package com.ldm2468.upnl.screen;
 
 import static com.ldm2468.upnl.Upnl.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.ldm2468.upnl.KB;
 
 public class TitleScreen implements Screen {
     @Override
@@ -18,9 +19,14 @@ public class TitleScreen implements Screen {
         game.sbui.begin();
         game.sbui.draw(game.title, Gdx.graphics.getWidth() / 2 - game.title.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - game.title.getHeight() / 2);
+        GlyphLayout namePrompt = new GlyphLayout(game.smallFont, "Press ESC to change name (currently " + game.preferences.getString("name", "error") + ")");
+        game.smallFont.draw(game.sbui, namePrompt, Gdx.graphics.getWidth() /2 - namePrompt.width / 2,
+                Gdx.graphics.getHeight() / 2 - game.title.getHeight() / 2);
         game.sbui.end();
 
-        if (KB.anyKeyJ()) { // any key
+        if(KB.anyJ(Input.Keys.ESCAPE)) {
+            game.setScreen(new NameScreen());
+        } else if (KB.anyKeyJ()) { // any key
             game.setScreen(new GameScreen());
         }
     }
