@@ -4,21 +4,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.ldm2468.upnl.KB;
 import com.ldm2468.upnl.Leaderboard;
 import com.ldm2468.upnl.Utils;
 
 import static com.ldm2468.upnl.Upnl.game;
+import static com.ldm2468.upnl.screen.GameScreen.hellColor;
 
 public class GameOverScreen implements Screen {
     long score;
     float anim = 0;
     static final float ANIM_END = 0.5f;
     boolean posted = false;
+    boolean hell = false;
 
-    public GameOverScreen(long score) {
+    public GameOverScreen(long score, boolean hell) {
         this.score = score;
+        this.hell = hell;
     }
 
     @Override
@@ -27,6 +31,12 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if (hell) {
+            game.sr.begin(ShapeRenderer.ShapeType.Filled);
+            game.sr.setColor(hellColor);
+            game.sr.rect(-game.W * 10, -game.H * 10, game.W * 20, game.H * 20);
+            game.sr.end();
+        }
         int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
         GlyphLayout timeLayout = new GlyphLayout(game.boldFont, Utils.formatNanoTime(score));
         GlyphLayout prompt1 = new GlyphLayout(game.smallFont, "Press any key to restart");
@@ -46,14 +56,16 @@ public class GameOverScreen implements Screen {
             y3 = Interpolation.linear.apply(-prompt1.height - prompt2.height, y3, a);
             anim += Gdx.graphics.getDeltaTime();
         } else if (!posted) {
-            Leaderboard.post(game.preferences.getString("name", "error"), score / 100000);
+            Leaderboard.post(game.preferences.getString("name", "error"), score / 100000, hell);
             posted = true;
+        } else if (KB.anyJ(Input.Keys.H)) {
+            game.setScreen(new GameScreen(true));
         } else if (KB.anyJ(Input.Keys.ESCAPE)) {
             game.setScreen(new TitleScreen());
         } else if (KB.anyJ(Input.Keys.SPACE)) {
             Gdx.net.openURI("http://ldm2468.com/upnl-leaderboard");
         } else if (KB.anyKeyJ()) {
-            game.setScreen(new GameScreen());
+            game.setScreen(new GameScreen(false));
         }
         game.sbui.begin();
         game.boldFont.draw(game.sbui, timeLayout, x, y);

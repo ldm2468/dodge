@@ -6,7 +6,7 @@ import com.ldm2468.upnl.screen.GameScreen;
 
 public class GravityEnemy extends CircularEnemy {
     float vx = 0, vy = 0;
-    static final float MAX_SPEED = 2;
+    static final float MAX_SPEED = 1.5f;
     float g;
 
     /**

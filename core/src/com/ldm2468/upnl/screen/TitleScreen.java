@@ -26,14 +26,16 @@ public class TitleScreen implements Screen {
         game.smallFont.draw(game.sbui, scorePrompt, Gdx.graphics.getWidth() / 2 - namePrompt.width / 2,
                 Gdx.graphics.getHeight() / 2 - game.title.getHeight() / 2 + 84 - namePrompt.height);
         game.sbui.end();
-
-        if (KB.anyJ(Input.Keys.ESCAPE)) {
+        if (KB.anyJ(Input.Keys.H)) {
+            game.setScreen(new GameScreen(true));
+        } else if (KB.anyJ(Input.Keys.ESCAPE)) {
             game.setScreen(new NameScreen());
-        } else if(KB.anyJ(Input.Keys.SPACE)) {
+        } else if (KB.anyJ(Input.Keys.SPACE)) {
             Gdx.net.openURI("http://ldm2468.com/upnl-leaderboard");
         } else if (KB.anyKeyJ()) { // any key
-            game.setScreen(new GameScreen());
+            game.setScreen(new GameScreen(false));
         }
+
     }
 
     @Override
