@@ -19,8 +19,12 @@ public class Leaderboard {
             params.put("score", "" + score);
             byte[] md5 = MessageDigest.getInstance("MD5").digest((name + score + "$alt").getBytes());
             StringBuilder sb = new StringBuilder();
-            for (byte b : md5) {
-                sb.append(String.format("%02x", b));
+            for (byte aMd5 : md5) {
+                String hex = Integer.toHexString(0xFF & aMd5);
+                if (hex.length() == 1) {
+                    sb.append('0');
+                }
+                sb.append(hex);
             }
             params.put("checksum", sb.toString());
             request.setUrl("http://ldm2468.com/upnl-leaderboard/post.php");
